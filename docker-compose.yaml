@@ -16,5 +16,5 @@ services:
 
 networks:
   nvidia-rag:
-    external: true
+    driver: bridge
     name: nvidia-rag
