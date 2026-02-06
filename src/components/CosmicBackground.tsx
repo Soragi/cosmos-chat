@@ -12,8 +12,8 @@ function NetworkMesh() {
   const pointsRef = useRef<THREE.Points>(null);
   const linesRef = useRef<THREE.LineSegments>(null);
   
-  const nodeCount = 60;
-  const connectionDistance = 8;
+  const nodeCount = 150;
+  const connectionDistance = 6;
 
   // Generate nodes with positions and velocities
   const { nodes, initialPositions } = useMemo(() => {
@@ -21,9 +21,9 @@ function NetworkMesh() {
     const positions = new Float32Array(nodeCount * 3);
     
     for (let i = 0; i < nodeCount; i++) {
-      const x = (Math.random() - 0.5) * 40;
-      const y = (Math.random() - 0.5) * 25;
-      const z = (Math.random() - 0.5) * 20 - 10;
+      const x = (Math.random() - 0.5) * 50;
+      const y = (Math.random() - 0.5) * 30;
+      const z = (Math.random() - 0.5) * 25 - 12;
       
       positions[i * 3] = x;
       positions[i * 3 + 1] = y;
@@ -44,7 +44,7 @@ function NetworkMesh() {
   }, []);
 
   // Pre-allocate line geometry (max possible connections)
-  const maxLines = nodeCount * 6;
+  const maxLines = nodeCount * 10;
   const linePositions = useMemo(() => new Float32Array(maxLines * 6), []);
   const lineColors = useMemo(() => new Float32Array(maxLines * 6), []);
 
@@ -59,9 +59,9 @@ function NetworkMesh() {
       node.position.add(node.velocity);
       
       // Bounce off boundaries
-      if (Math.abs(node.position.x) > 22) node.velocity.x *= -1;
-      if (Math.abs(node.position.y) > 14) node.velocity.y *= -1;
-      if (node.position.z > -2 || node.position.z < -18) node.velocity.z *= -1;
+      if (Math.abs(node.position.x) > 27) node.velocity.x *= -1;
+      if (Math.abs(node.position.y) > 17) node.velocity.y *= -1;
+      if (node.position.z > 0 || node.position.z < -22) node.velocity.z *= -1;
       
       positions[i * 3] = node.position.x;
       positions[i * 3 + 1] = node.position.y;
@@ -126,7 +126,7 @@ function NetworkMesh() {
         </bufferGeometry>
         <pointsMaterial
           color="#76B900"
-          size={0.15}
+          size={0.12}
           transparent
           opacity={0.8}
           sizeAttenuation
@@ -160,11 +160,11 @@ function FloatingParticles() {
   const ref = useRef<THREE.Points>(null);
   
   const positions = useMemo(() => {
-    const pos = new Float32Array(100 * 3);
-    for (let i = 0; i < 100; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 50;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 30;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 30 - 15;
+    const pos = new Float32Array(200 * 3);
+    for (let i = 0; i < 200; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 60;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 40;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 35 - 18;
     }
     return pos;
   }, []);
