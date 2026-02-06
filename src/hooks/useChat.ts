@@ -38,6 +38,7 @@ export function useChat(
     const testUrl = url || settings.backendUrl;
     
     try {
+      // AIQ Research Assistant uses /docs or /health endpoint
       const response = await fetch(`${testUrl}/health`, {
         method: 'GET',
         signal: AbortSignal.timeout(5000),
@@ -46,8 +47,19 @@ export function useChat(
       setIsConnected(connected);
       return connected;
     } catch {
-      setIsConnected(false);
-      return false;
+      // Try alternative endpoint for AIQ backend
+      try {
+        const altResponse = await fetch(`${testUrl}/docs`, {
+          method: 'GET',
+          signal: AbortSignal.timeout(5000),
+        });
+        const connected = altResponse.ok;
+        setIsConnected(connected);
+        return connected;
+      } catch {
+        setIsConnected(false);
+        return false;
+      }
     }
   }, [getSettings]);
 
