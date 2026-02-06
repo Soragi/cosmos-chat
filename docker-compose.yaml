@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  aiq-web-ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aiq-web-ui
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    networks:
+      - nvidia-rag
+    environment:
+      - NODE_ENV=production
+
+networks:
+  nvidia-rag:
+    external: true
+    name: nvidia-rag
