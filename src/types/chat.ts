@@ -28,6 +28,6 @@ export interface ChatSettings {
 }
 
 export const DEFAULT_SETTINGS: ChatSettings = {
-  backendUrl: 'http://localhost:8000',
+  backendUrl: 'http://localhost:3838',
   animationsEnabled: true,
 };

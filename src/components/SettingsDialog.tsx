@@ -103,7 +103,8 @@ export function SettingsDialog({
               </Button>
             </div>
             <p className="text-xs text-muted-foreground">
-              The URL of your running AIQ Research Assistant backend.
+              The URL of your AIQ Research Assistant backend (default: http://localhost:3838).
+              API docs available at /docs endpoint.
             </p>
           </div>
 
